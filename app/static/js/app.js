@@ -30,6 +30,30 @@ jQuery(document).ready( function($){
     checkAnimate();
   });
 
+  $("#submit").on("click", function(a){
+    $("#fileAlert").addClass('hide');
+    a.preventDefault();
+    a.stopImmediatePropagation();
+    var form_data = new FormData($('#upload-file')[0]);
+    var file=$("#imageFile").val();
 
+    if( file == ''){
+      $("#fileAlert").removeClass('hide');
+    }else{
+      $.ajax({
+          type: 'POST',
+          url: '/getfile',
+          data: form_data,
+          contentType: false,
+          dataType: 'json',
+          cache: false,
+          processData: false,
+          success: function(data) {
+              console.log('Success!');
+              console.log(data);
+          },
+      });
+    }
+  });
   checkAnimate();
 });

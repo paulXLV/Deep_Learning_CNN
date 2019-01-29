@@ -19,7 +19,7 @@
 
 <body>
   <header>
-    <h1>Happiness Index</h1>
+    <h1>Prediction</h1>
   </header>
   <div class="container">
     <section class="main">
@@ -31,10 +31,6 @@
           <ul>
             <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
             <li><a href="/info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Info</a></li>
-            <li><a href="/map"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Choropleth</a></li>
-            <li><a href="/world"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Map</a></li>
-            <li><a href="/scatter"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>Scatter</a></li>
-            <li><a href="/charts"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Charts</a></li>
           </ul>
         </div>
       </div>
@@ -42,47 +38,15 @@
         <div class="col-md-12">
           <div class="chartContainer">
             <section>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/map">
-                      <img src="../static/images/choro.png" />
-                      <div class="title">
-                        Choropleth
-                      </div>
-                    </a>
+              <div class="imageUpload">
+                <form action="/getfile" method="post" enctype="multipart/form-data" id="upload-file">
+                  <input type="file" name="imageFile" class="imageInput" id="imageFile">
+                  <button id="submit" class="btn btn-primary">Check</button>
+
+                  <div class="alert alert-danger hide" role="alert" id="fileAlert">
+                    No file selected.
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/world">
-                      <img src="../static/images/map.png" />
-                      <div class="title">
-                        World map
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/scatter">
-                      <img src="../static/images/scatter.png" />
-                      <div class="title">
-                        Scatter Plot
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/charts">
-                      <img src="../static/images/chart.png" />
-                      <div class="title">
-                       Charts
-                      </div>
-                    </a>
-                  </div>
-                </div>
+                </form>
               </div>
             </section>
           </div>  

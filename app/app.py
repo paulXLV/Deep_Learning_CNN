@@ -8,9 +8,12 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, request, redirect, url_for, jsonify,  jsonify, render_template
+
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = 'Uploads'
 
 #################################################
 # Database Setup
@@ -38,11 +41,19 @@ def info():
 
 	return render_template("info.html")
 
-@app.route("/map")
-def map():
+@app.route("/getfile", methods=['GET', 'POST'])
+def getFile():
 
-    return render_template("map.html")
-
+	print(request.files)
+	if request.method == 'POST':
+		if request.files.get('imageFile'):
+			print("file if")
+			file=request.files['imageFile']
+			filename = file.filename
+			filepath= os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			file.save(filepath)
+	ar.append({"filepath": filepath})
+	return jsonify(ar)
 
 @app.route("/scatter")
 def scatter():
