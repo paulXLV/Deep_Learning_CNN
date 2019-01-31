@@ -43,8 +43,8 @@ def info():
 
 @app.route("/getfile", methods=['GET', 'POST'])
 def getFile():
+	send=[]
 
-	print(request.files)
 	if request.method == 'POST':
 		if request.files.get('imageFile'):
 			print("file if")
@@ -52,80 +52,16 @@ def getFile():
 			filename = file.filename
 			filepath= os.path.join(app.config['UPLOAD_FOLDER'], filename)
 			file.save(filepath)
-	ar.append({"filepath": filepath})
-	return jsonify(ar)
 
-@app.route("/scatter")
-def scatter():
-    
-    return render_template("scatter.html")
+			send.append({"filepath": filepath})
 
+	import models.model
 
-@app.route("/charts")
-def charts():
+	from models.model import predict_animal
 
-    return render_template("charts.html")
-
-@app.route("/world")
-def world():
-
-    return render_template("world.html")
-
-@app.route("/api/scatter/<dt>")
-def apiScatter(dt):
-	sql = "SELECT * FROM happiness_master WHERE happiness_year = '"+dt+"'"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-
-	return jsonify(results)
-
-@app.route("/api/charts/<dt>")
-def apiCharts(dt):
-	
-	sql='select avg(happiness_score) as "Average", country_region.region from happiness_master join country_region on happiness_master.country = country_region.country  where happiness_master.happiness_year="'+dt+'" group by country_region.region order by average asc'
-	cursor.execute(sql)
-	results = cursor.fetchall()
-
-	return jsonify(results)
-
-@app.route("/api/bar/<dt>")
-def apiBar(dt):
-	
-	sql = "SELECT * FROM happiness_master WHERE happiness_year = '"+dt+"' order by happiness_rank asc limit 50"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-
-	return jsonify(results)
-
-@app.route("/api/world")
-def apiWorld():
-	send=[]
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where happiness_rank < 11 and happiness_year = '2015'"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where happiness_rank < 11 and happiness_year = '2016'"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where happiness_rank < 11 and happiness_year = '2017'"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-	
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where Happiness_year = '2015' order by happiness_rank desc limit 10"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where Happiness_year = '2016' order by happiness_rank desc limit 10"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-	sql = "select * from happiness_master join country_lon_lng on happiness_master.country = country_lon_lng.country where Happiness_year = '2017' order by happiness_rank desc limit 10"
-	cursor.execute(sql)
-	results = cursor.fetchall()
-	send.append(results)
-
+	prediction = predict_animal(filepath)
+	print(prediction)
+	send.append({"prediction": prediction})
 	return jsonify(send)
 
 if __name__ == "__main__":
