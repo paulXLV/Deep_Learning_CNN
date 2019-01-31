@@ -51,6 +51,8 @@ jQuery(document).ready( function($){
           success: function(data) {
               console.log('Success!');
               console.log(data);
+              $("#imageUploaded").html('<img src="/static/images/uploads/'+data[0].filepath+'" />');
+              $("#predictionInfo").html('<div><label>Predicted Animal :</label> '+data[1].prediction.animal+'</div><div><label>Prediction Accuracy :</label> '+data[1].prediction.accuracy+'</div>');
           },
       });
     }

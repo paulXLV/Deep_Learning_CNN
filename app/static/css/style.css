@@ -180,3 +180,11 @@ section.main{
 .alert-danger{
 	margin-top: 15px;
 }
+
+.predictData{
+	margin-top: 30px;
+}
+#imageUploaded img{
+	width: 100%;
+	height: auto;
+}
