@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+/* HEADER */
+header{
+	position: relative;
+	margin: 0;
+	background: black;
+	background-image: url("../images/bg.jpg");
+	background-attachment: fixed;
+	background-position: 40% center;
+	background-size: cover;
+}
+header h1{
+	padding-top: 150px;
+	padding-bottom: 150px;
+	font-size: 60px;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	background-color: rgba(50,150,50, 0.6);
+}
+
+/* NAV */
+.navbar {
+	margin-bottom: 0px;
+}
+.navbar-brand img {
+	max-height: 100%;
+}
+/* MAIN */
+section.main{
+	padding-bottom: 150px;
+	padding-top: 50px;
+	position: relative;
+	overflow: hidden;
+}
+.glyphicon{
+	margin-right: 10px;
+}
+.sidebar-nav{
+	position: fixed;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0px;
+	z-index: 99999;
+	width: 200px;
+	left: -200px;
+	transition: all ease-in-out .5s;
+}
+.sidebar-nav .tab{
+	display: inline-block;
+	position: absolute;
+	right: -46px;
+	top: -2px;
+}
+.sidebar-nav .tab:hover{
+	cursor: pointer;
+}
+.sidebar-nav .tab span{
+	padding: 20px 16px;
+	background-color: #467dd6;
+	color: #fff;
+	display: block;
+	margin-right: 0;
+}
+.sidebar-nav.active{
+	left: 0;
+	transition: all ease-in-out .5s;
+}
+.sidebar-nav.active .tab{
+	transform: rotate(180deg);
+	top: 0px;
+	transition: ease-in-out;
+}
+.sidebar-nav ul{
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar-nav ul li a{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	padding-left: 30px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+}
+
+.sidebar-nav ul li a, .sidebar-nav ul li a:hover{
+	color: #fff;
+	text-decoration: none;
+}
+
+.chartContainer .home-tile{
+	padding-bottom: 30px;
+}
+/** home **/
+.home-tile a{
+	display: block;
+	overflow: hidden;
+	position: relative;
+}
+
+.home-tile a img{
+	width: 100%;
+	height: auto;
+}
+
+.home-tile a .title{
+	background-color: rgba(60,60,60, .7);
+	color: #fff;
+	text-transform: uppercase;
+	padding-top: 20px; 
+	padding-bottom: 20px;
+	transition: all ease-in-out .3s;
+	bottom: -60px;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+}
+
+.home-tile a:hover{
+	text-transform: none;
+}
+
+.home-tile a:hover .title{
+	bottom: 0;
+	transition: all ease-in-out .3s;
+}
+
+/*** map page ***/
+.details {
+    top: 170px;
+    visibility: hidden;
+    width: auto;
+    padding: 10px;
+    height: 50%;
+    position: absolute;
+    background-color: rgba(106,104,221, .7);
+    font-size: 15px;
+    z-index: 999;
+}
+.legend { 
+	text-align: left; 
+	line-height: 18px; 
+	color: #555; } 
+.legend i { 
+	width: 18px; 
+	height: 18px; 
+	float: left; 
+	margin-right: 8px; 
+	opacity: 0.7; 
+}
+
+.info { 
+	padding: 6px 8px; 
+	background-color: rgba(255,255,255,0.8); 
+	box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+	border-radius: 5px;
+} 
+.info h4 {
+	margin: 0 0 5px; 
+	color: #777; 
+}
+.Score, .Rank{
+	font-weight: 600;
+	text-transform: uppercase;
+
+}
+.mapPage #map, .worldPage #plot {
+    min-height: 800px;
+}
+
+.mapPage .main, .worldPage .main{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.mapPage .chartContainer {
+	position: relative;
+}
+.mapPage .mapFilter{
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: rgba(80,30, 200, .5);
+	padding: 10px;
+	z-index: 400;
+}
+.mapPage .mapFilter span{
+	color: #fff;
+	padding-right: 15px;
+}
+
+/** SCATTER **/
+.dateSwitch{
+	width: 100%;
+	background-color: rgba(130,130,130, .7);
+	text-align: center;
+}
+.dateSwitch ul{
+	display: inline-block;
+	width: auto;
+	margin: 0;
+	padding: 10px 15px;
+	list-style-type: none;
+}
+
+.dateSwitch ul li{
+	float: left;
+	padding-left: 30px;
+}
+.dateSwitch ul li:first-child{
+	padding-left: 0px;
+}
+.dateSwitch ul:last-child:after{
+	display: block;
+	content: '';
+	clear:both;
+}
+.dateSwitch ul li a{
+	display: block;
+	padding: 10px 15px;
+	background-color: #3399be;
+	color: #000;
+	transition: all ease-in-out .3s;
+	text-decoration: none;
+}
+
+.dateSwitch ul li a:hover, .dateSwitch ul li a.active{
+	background-color: #666;
+	color: #fff;
+	text-decoration: none;
+	transition: all ease-in-out .3s;
+}
+
+ ul.chartSwitch{
+	float: left;
+}
+.dateSwitch ul.dtSwitch {
+	float: right;
+}
+.dateSwitch:after{
+	display:block;
+	clear: both;
+	content: '';
+}
