@@ -10,26 +10,13 @@ from sqlalchemy import create_engine
 
 from flask import Flask, request, redirect, url_for, jsonify,  jsonify, render_template
 
+import random
+import string
+import datetime
 
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = 'static/images/uploads'
-
-#################################################
-# Database Setup
-#################################################
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:passowrd@server/happiness'
-# db = SQLAlchemy(app)
-
-# import pymysql
-
-# db = pymysql.connect(host='localhost',
-#         user='root',
-#         password='password',
-#         db='happiness',
-#         cursorclass=pymysql.cursors.DictCursor)
-# cursor = db.cursor()
 
 @app.route("/")
 def index():
@@ -50,17 +37,34 @@ def getFile():
 			print("file if")
 			file=request.files['imageFile']
 			filename = file.filename
-			filepath= os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			fileExtS = filename.split('.')
+			fileExt = fileExtS[1]
+			now = datetime.datetime.now()
+			rep = str(now).replace(" ",'').replace(":",'').replace(".",'').replace("-",'')
+			rand = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
+			testname= rand+rep+'.'+fileExt
+			filepath= os.path.join(app.config['UPLOAD_FOLDER'], testname)
 			file.save(filepath)
 
-			send.append({"filepath": filename})
+			send.append({"filepath": testname})
 
 	import models.model
 
-	from models.model import predict_animal
+	from models.model import predict_animal, toDb
 
 	prediction = predict_animal(filepath)
 	print(prediction)
+	dataSet = {
+		'accuracy' : prediction['accuracy'],
+        'prediction': prediction['animal'],
+        'filePath': filepath,
+        'scrapedOn': now
+    }
+	print(dataSet)
+
+
+
+	toDb(dataSet)
 	send.append({"prediction": prediction})
 	return jsonify(send)
 
