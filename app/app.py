@@ -1,4 +1,4 @@
-import os
+import os,sys
 
 import pandas as pd
 import numpy as np
@@ -10,13 +10,21 @@ from sqlalchemy import create_engine
 
 from flask import Flask, request, redirect, url_for, jsonify,  jsonify, render_template
 
-import random
 import string
 import datetime
 
-app = Flask(__name__)
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
-app.config['UPLOAD_FOLDER'] = 'static/images/uploads'
+cloudinary.config(
+	cloud_name = "dmxampqzw",
+	api_key = "395587197797289",
+	api_secret ="TO5ElOeLRESKgs3JXWO8nTsi8Aw")
+
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = os.path.realpath('static/images/uploads')
 
 @app.route("/")
 def index():
@@ -40,33 +48,43 @@ def getFile():
 			fileExtS = filename.split('.')
 			fileExt = fileExtS[1]
 			now = datetime.datetime.now()
-			rep = str(now).replace(" ",'').replace(":",'').replace(".",'').replace("-",'')
-			rand = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)])
-			testname= rand+rep+'.'+fileExt
-			filepath= os.path.join(app.config['UPLOAD_FOLDER'], testname)
-			file.save(filepath)
-
-			send.append({"filepath": testname})
-
-	import models.model
+			cd = cloudinary.uploader.upload(file,folder = "rudsfinal")
+			cdFilename= cd['secure_url']
+			send.append({"filepath": cdFilename})
 
 	from models.model import predict_animal, toDb
 
-	prediction = predict_animal(filepath)
-	print(prediction)
+	prediction = predict_animal(cdFilename)
+
 	dataSet = {
 		'accuracy' : prediction['accuracy'],
         'prediction': prediction['animal'],
-        'filePath': filepath,
+        'accuracy_outline': prediction['accuracy_outline'],
+        'prediction_outline': prediction['animal_outline'],
+        'filePath': cdFilename,
+        'score_list': prediction['score_list'],
+        'score_list_outline': prediction['score_list_outline'],
         'scrapedOn': now
     }
-	print(dataSet)
-
-
 
 	toDb(dataSet)
 	send.append({"prediction": prediction})
 	return jsonify(send)
+
+@app.route("/stats", methods=['GET', 'POST'])
+def stats():
+	from models.model import getDbItems
+
+	dbInfo = getDbItems()
+	
+	return render_template("stats.html", data=dbInfo)
+
+@app.route("/statsjson", methods=['GET', 'POST'])
+def statsjson():
+	from models.model import getDbItemsJson
+
+	dbInfo = getDbItemsJson()
+	return jsonify(dbInfo)
 
 if __name__ == "__main__":
     app.run()

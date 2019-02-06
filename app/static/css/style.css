@@ -188,3 +188,32 @@ section.main{
 	width: 100%;
 	height: auto;
 }
+.overlay{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #333;
+	opacity: .7;
+}
+.overlay.hide{
+	display: none;
+}
+.imageUpload{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	position: relative;
+}
+
+.training h2{
+	text-align: center;
+}
+.training img{
+	width: 100%;
+	height: auto;
+}
+.pred h5{
+	text-transform: uppercase;
+	font-weight: 600;
+}

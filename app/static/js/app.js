@@ -37,9 +37,12 @@ jQuery(document).ready( function($){
     var form_data = new FormData($('#upload-file')[0]);
     var file=$("#imageFile").val();
 
+    $("#imageUploaded").html('');
+    $("#predictionInfo").html('');
     if( file == ''){
       $("#fileAlert").removeClass('hide');
     }else{
+      $("#overlay").removeClass('hide');
       $.ajax({
           type: 'POST',
           url: '/getfile',
@@ -49,13 +52,32 @@ jQuery(document).ready( function($){
           cache: false,
           processData: false,
           success: function(data) {
-              console.log('Success!');
-              console.log(data);
-              $("#imageUploaded").html('<img src="/static/images/uploads/'+data[0].filepath+'" />');
-              $("#predictionInfo").html('<div><label>Predicted Animal :</label> '+data[1].prediction.animal+'</div><div><label>Prediction Accuracy :</label> '+data[1].prediction.accuracy+'</div>');
+              $('#imageFile').val('');
+              $("#overlay").addClass('hide');
+              $("#imageUploaded").html('<img src="'+data[0].filepath+'" />');
+              $("#predictionInfo").append('<div><label>Predicted Animal :</label> '+data[1].prediction.animal+'</div>');
+              $("#predictionInfo").append('<div><label>Prediction Accuracy :</label> '+data[1].prediction.accuracy+'</div>');
+              var scorelist=data[1].prediction.score_list;
+              var scorelist1=data[1].prediction.score_list_outline;
+              $("#predictionInfo").append('<h4>Prediction Percentages</h4>');
+              scorelist.forEach(function(a,b){
+                $("#predictionInfo").append('<div><label>'+a[0]+'</label> : <span>'+a[1]+'</span></div>');
+              });
+              $("#predictionInfo").append('<hr /><div><label>Prediction Animal (Outline) :</label> '+data[1].prediction.animal_outline+'</div>');
+              $("#predictionInfo").append('<div><label>Prediction Accuracy (Outline) :</label> '+data[1].prediction.accuracy_outline+'</div>');
+              $("#predictionInfo").append('<h4>Prediction Percentages</h4>');
+              scorelist1.forEach(function(a,b){
+                $("#predictionInfo").append('<div><label>'+a[0]+'</label> : <span>'+a[1]+'</span></div>');
+              });
           },
+          fail: function(err){
+               $("#overlay").addClass('hide');
+               $("#predictionInfo").html("<div>Error</div>");
+          }
+
       });
     }
+    
   });
   checkAnimate();
 });

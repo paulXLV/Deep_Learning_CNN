@@ -19,7 +19,7 @@
 
 <body>
   <header>
-    <h1>Project Information</h1>
+    <h1>Stats</h1>
   </header>
   <div class="container">
     <section class="main">
@@ -37,52 +37,26 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <div class="chartContainer infoPage">
+          <div class="chartContainer infoPage row clearfix">
             <section>
-              <div class="animated fadeInDown hide">
-                <h2>Members</h2>
-                <h4>Bryan</h4>
-                <h4>Isaac</h4>
-                <h4>Paul</h4>
-                <h4>Monisha</h4>
-                <h4>Chauhan</h4>
-                <h4>Sandino</h4>
+              <div class="col-md-12">
+                <div class="animated fadeInDown hide">
+                  <div><label>Total Predictions : </label> <span>{{data['count']}}</span></div>
+                  <div><label>Average Accuracy : </label> <span>{{data['total_average']['accuracy']}}</span></div>
+                  <div><label>Average Accuracy (Outline) : </label> <span>{{data['total_average']['accuracy_outline']}}</span></div>
+                </div>
               </div>
-              <div class="animated fadeInDown hide">
-                <h2>Technologies</h2>
-                <ul>
-                  <li>
-                    Python - CNN Training
-                    <ul>
-                      <li>Tensorflow</li>
-                      <li>Keras</li>
-                    </ul>
-                  </li>
-                  <li>
-                    Flask - Web Application
-                  </li>
-                  <li>
-                    MongoDB - Database Storage
-                  </li>
-                  <li>
-                    Heroku - Web Service
-                  </li>
-                </ul>
+              <hr />
+              <div class="col-md-6">
+                <h4>Prediction Stats</h4>
+                <div class="pred" id="predStats">
 
+                </div>
               </div>
-              <div class="row clearfix">
-                <div class="training">
-                  <h2>Model Training and Validation</h2>
-                  <div class="col-md-6">
-                    <h4>Training Curves 3D</h4>
-                    <img src="/static/images/curve1.png" />
-                    <img src="/static/images/curve2.png" />
-                  </div>
-                  <div class="col-md-6">
-                    <h4>Training Curves Outline</h4>
-                    <img src="/static/images/curve5.png" />
-                    <img src="/static/images/curve6.png" />
-                  </div>
+              <div  class="col-md-6">
+                <h4>Prediction Stats (Outline)</h4>
+                <div class="pred" id="predStatsOutline">
+
                 </div>
               </div>
             </section>
@@ -97,6 +71,7 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
   <script src="../static/js/app.js"></script>
+  <script src="../static/js/stats.js"></script>
 </body>
 
 </html>

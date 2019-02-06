@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/animate.css">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <h1>Prediction</h1>
+    <h1>&nbsp;</h1>
   </header>
   <div class="container">
     <section class="main">
@@ -30,6 +30,7 @@
         <div class="sidebar-items">
           <ul>
             <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li><a href="/stats"><span class="glyphicon glyphicon-random" aria-hidden="true"></span>Stats</a></li>
             <li><a href="/info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Info</a></li>
           </ul>
         </div>
@@ -46,10 +47,18 @@
                   <div class="alert alert-danger hide" role="alert" id="fileAlert">
                     No file selected.
                   </div>
+                  <div class="overlay hide" id="overlay">
+
+                  </div>
                 </form>
               </div>
             </section>
             <section class="predictData">
+              <div class="col-md-12">
+                <div id="">
+                  
+                </div>
+              </div>
               <div class="col-md-6">
                 <div id="imageUploaded">
 
@@ -57,7 +66,7 @@
               </div>
               <div class="col-md-6">
                 <div id="predictionInfo">
-                  
+
                 </div>
               </div>
             </section>
