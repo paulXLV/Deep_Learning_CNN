@@ -5,21 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Happiness Index | Homepage</title>
+  <title>Animal Superhero | Home</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}"> -->
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/animate.css">
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <h1>Happiness Index</h1>
+    <h1>&nbsp;</h1>
   </header>
   <div class="container">
     <section class="main">
@@ -30,11 +30,8 @@
         <div class="sidebar-items">
           <ul>
             <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
+            <li><a href="/stats"><span class="glyphicon glyphicon-random" aria-hidden="true"></span>Stats</a></li>
             <li><a href="/info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Info</a></li>
-            <li><a href="/map"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Choropleth</a></li>
-            <li><a href="/world"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Map</a></li>
-            <li><a href="/scatter"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span>Scatter</a></li>
-            <li><a href="/charts"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>Charts</a></li>
           </ul>
         </div>
       </div>
@@ -42,46 +39,34 @@
         <div class="col-md-12">
           <div class="chartContainer">
             <section>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/map">
-                      <img src="../static/images/choro.png" />
-                      <div class="title">
-                        Choropleth
-                      </div>
-                    </a>
+              <div class="imageUpload">
+                <form action="/getfile" method="post" enctype="multipart/form-data" id="upload-file">
+                  <input type="file" name="imageFile" class="imageInput" id="imageFile">
+                  <button id="submit" class="btn btn-primary">Check</button>
+
+                  <div class="alert alert-danger hide" role="alert" id="fileAlert">
+                    No file selected.
                   </div>
+                  <div class="overlay hide" id="overlay">
+
+                  </div>
+                </form>
+              </div>
+            </section>
+            <section class="predictData">
+              <div class="col-md-12">
+                <div id="">
+                  
                 </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/world">
-                      <img src="../static/images/map.png" />
-                      <div class="title">
-                        World map
-                      </div>
-                    </a>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div id="imageUploaded">
+
                 </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/scatter">
-                      <img src="../static/images/scatter.png" />
-                      <div class="title">
-                        Scatter Plot
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="home-tile animated fadeInUp hide">
-                    <a href="/charts">
-                      <img src="../static/images/chart.png" />
-                      <div class="title">
-                       Charts
-                      </div>
-                    </a>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div id="predictionInfo">
+
                 </div>
               </div>
             </section>
