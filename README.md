@@ -1,4 +1,4 @@
-# Final Project: Small Machine Learning CNN with Small Dataset
+# The Little CNN That Could: Small Machine Learning CNN with Small Dataset
 ![](final_curve_fit_acc.png) ![](final_curve_fit_loss.png)
 
 #Heroku APP
