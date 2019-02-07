@@ -81,9 +81,12 @@ def stats():
 
 @app.route("/statsjson", methods=['GET', 'POST'])
 def statsjson():
-	from models.model import getDbItemsJson
+	dbInfo=[]
+	if request.method == 'POST':
+		from models.model import getDbItemsJson
 
-	dbInfo = getDbItemsJson()
+		dbInfo = getDbItemsJson()
+	
 	return jsonify(dbInfo)
 
 if __name__ == "__main__":
